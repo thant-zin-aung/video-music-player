@@ -19,7 +19,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class MainController {
     @FXML
     public void initialize() {
         System.out.println("Initialized");
-        syncVideos("Friendzone ost");
+        new Thread(()->syncVideos("Friendzone ost")).start();
     }
 
     @FXML
@@ -134,5 +136,36 @@ public class MainController {
             System.err.println("Error during the request: " + e.getMessage());
         }
         return dataList;
+    }
+
+    public static void extractBestVideoAudioUrls(String videoUrl) {
+        new Thread(()->{
+            try {
+                ProcessBuilder pb = new ProcessBuilder(
+                        "yt-dlp", "-f", "bestvideo+bestaudio", "-g", videoUrl
+                );
+
+                Process process = pb.start();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+                String videoStreamUrl = reader.readLine(); // First line: Video URL
+                String audioStreamUrl = reader.readLine(); // Second line: Audio URL
+
+                process.waitFor();
+                reader.close();
+
+                System.out.println("Video URL: " + videoStreamUrl);
+                System.out.println("Audio URL: " + audioStreamUrl);
+                // Command to open VLC with separate video and audio URLs
+                ProcessBuilder vlcPB = new ProcessBuilder(
+                        "vlc", videoStreamUrl, "--input-slave=" + audioStreamUrl
+                );
+
+                vlcPB.start();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
