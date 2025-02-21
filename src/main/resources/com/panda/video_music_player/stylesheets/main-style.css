@@ -1,0 +1,57 @@
+/*.scrollpane-style {*/
+/*    -fx-background-color: b;*/
+/*}*/
+.root {
+    -fx-background-color: #131313;
+}
+.search-wrapper {
+    -fx-background-color: #2a2a2a;
+}
+.search-box {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+.search-button {
+    -fx-background-color: #a9a9a9;
+    -fx-background-radius: 0 0 0 0;
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.scrollpane-style {
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: #3d3d3d;
+    -fx-border-style: solid;
+    -fx-border-width: 1px 0 0 0;
+}
+.scrollpane-style .viewport {
+    -fx-background-color: #131313;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: #131313;
+    -fx-border-width: 0px;
+}
+/* Track (the background area of the scrollbar) */
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* Light gray track */
+    -fx-border-color: transparent;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+/* Thumb (the draggable part of the scrollbar) */
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #575757; /* Blue thumb */
+    -fx-background-radius: 5px;
+    -fx-border-color: transparent;
+}
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-opacity: 0; /* Make them invisible */
+    -fx-padding: 0;
+}
