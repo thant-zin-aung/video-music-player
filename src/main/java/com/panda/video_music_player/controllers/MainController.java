@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,7 +37,7 @@ public class MainController {
     @FXML
     public void initialize() {
         System.out.println("Initialized");
-        syncVideos("Speak Now");
+        syncVideos("Friendzone ost");
     }
 
     @FXML
@@ -64,7 +65,23 @@ public class MainController {
                 itemHBox.setMinHeight(270);
                 itemHBox.setStyle("-fx-background-color: black");
                 itemHBox.setAlignment(Pos.CENTER);
-                itemHBox.getChildren().add(getImageView(dataList.get(i).get("thumbnail")));
+                StackPane stackPane = new StackPane();
+                stackPane.setAlignment(Pos.CENTER);
+                stackPane.setPrefWidth(600);
+                stackPane.setPrefHeight(270);
+                stackPane.getChildren().add(getImageView(dataList.get(i).get("thumbnail")));
+                HBox overlay = new HBox();
+                overlay.setPrefWidth(600);
+                overlay.setPrefHeight(270);
+                overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.6);");
+                stackPane.getChildren().add(overlay);
+                Label label = new Label(dataList.get(i).get("title"));
+                label.setWrapText(true);
+                label.setPrefWidth(500);
+                label.setAlignment(Pos.CENTER);
+                label.setStyle("-fx-font-size: 20px; -fx-text-fill: white; -fx-text-alignment: center;");
+                stackPane.getChildren().add(label);
+                itemHBox.getChildren().add(stackPane);
                 rowHbox.getChildren().add(itemHBox);
                 if(i % 2 == 0) scrollVbox.getChildren().add(rowHbox);
             }
