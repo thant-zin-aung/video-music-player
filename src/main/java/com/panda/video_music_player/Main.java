@@ -17,7 +17,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        MainController.extractBestVideoAudioUrls("https://www.youtube.com/watch?v=p5Jw-T4dVss");
     }
 
     public static void main(String[] args) {

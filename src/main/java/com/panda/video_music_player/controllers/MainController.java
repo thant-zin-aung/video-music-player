@@ -91,8 +91,12 @@ public class MainController {
                 Button playVlcButton = new Button("Play In VLC");
                 playVlcButton.setPrefWidth(150);
                 playVlcButton.setPrefHeight(45);
+                int currentDataListId = i;
                 playVlcButton.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: white; -fx-text-fill: black;" +
                         "-fx-background-radius: 0px;");
+                playVlcButton.setOnMouseClicked(event -> {
+                    playVlcPlayer(dataList.get(currentDataListId).get("url"));
+                });
                 detailWrapper.getChildren().addAll(label, playVlcButton);
                 stackPane.getChildren().add(detailWrapper);
                 itemHBox.getChildren().add(stackPane);
@@ -138,7 +142,7 @@ public class MainController {
         return dataList;
     }
 
-    public static void extractBestVideoAudioUrls(String videoUrl) {
+    public static void playVlcPlayer(String videoUrl) {
         new Thread(()->{
             try {
                 ProcessBuilder pb = new ProcessBuilder(
